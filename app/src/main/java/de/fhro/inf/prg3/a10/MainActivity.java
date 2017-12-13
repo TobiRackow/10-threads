@@ -7,6 +7,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import de.fhro.inf.prg3.a10.kitchen.KitchenHatch;
+import de.fhro.inf.prg3.a10.kitchen.KitchenHatchImpl;
 import de.fhro.inf.prg3.a10.model.Order;
 import de.fhro.inf.prg3.a10.util.NameGenerator;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* TODO initialize the kitchen hatch
          * use the constant above to control how many meals may be placed in the hatch */
-        final KitchenHatch kitchenHatch = null;
+        final KitchenHatch kitchenHatch = new KitchenHatchImpl(KITCHEN_HATCH_SIZE,orders);
 
         /* setup progress reporter */
         final ProgressReporter progressReporter = new ProgressReporter.ProgressReporterBuilder()
@@ -52,6 +53,25 @@ public class MainActivity extends AppCompatActivity {
 
 
         /* TODO create the cooks and waiters, pass the kitchen hatch and the reporter instance and start them */
+
+        Cook cook1 = new Cook("Koch1",kitchenHatch,progressReporter);
+        Cook cook2 = new Cook("Koch2",kitchenHatch,progressReporter);
+        Cook cook3 = new Cook("Koch3",kitchenHatch,progressReporter);
+        Cook cook4 = new Cook("Koch4",kitchenHatch,progressReporter);
+
+        new Thread(cook1).start();
+        new Thread(cook2).start();
+        new Thread(cook3).start();
+        new Thread(cook4).start();
+
+        Waiter waiter1 = new Waiter("Waiter1",kitchenHatch,progressReporter);
+        Waiter waiter2 = new Waiter("Waiter2",kitchenHatch,progressReporter);
+        Waiter waiter3 = new Waiter("Waiter3",kitchenHatch,progressReporter);
+
+        new Thread(waiter1).start();
+        new Thread(waiter2).start();
+        new Thread(waiter3).start();
+
 
     }
 }

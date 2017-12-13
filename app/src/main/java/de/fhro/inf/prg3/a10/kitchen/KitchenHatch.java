@@ -42,7 +42,7 @@ public interface KitchenHatch {
      * Dequeue a completed dish
      * @return hopefully hot dish to serve to a guest
      */
-    default Dish dequeueDish() {
+    default Dish dequeueDish() throws InterruptedException {
         return dequeueDish(1000);
     }
 
@@ -51,13 +51,13 @@ public interface KitchenHatch {
      * @param timeout timeout to pass to the wait call if no meals are present
      * @return hopefully hot dish to serve to a guest
      */
-    Dish dequeueDish(long timeout);
+    Dish dequeueDish(long timeout) throws InterruptedException;
 
     /**
      * Enqueue a new completed dish to be served by a waiter
      * @param m Dish to enqueue
      */
-    void enqueueDish(Dish m);
+    void enqueueDish(Dish m) throws InterruptedException;
 
     /**
      * Get the total count of dishes in the kitchen hatch
